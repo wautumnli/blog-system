@@ -1,0 +1,28 @@
+jwt:
+  tokenHeader: X-Token
+  tokenHead: Bearer
+  secret: laser-jwt
+  expiration: 604800
+
+swagger:
+  enabled: true
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=mysql
+
+spring:
+  profiles:
+    active: dev

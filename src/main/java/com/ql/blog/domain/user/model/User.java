@@ -2,6 +2,7 @@ package com.ql.blog.domain.user.model;
 
 import com.ql.blog.base.entity.BaseAggregateRoot;
 import com.ql.blog.base.mark.AggregateRoot;
+import com.ql.blog.base.security.TokenUtil;
 import com.ql.blog.base.utils.BlogPasswordEncoder;
 import com.ql.blog.base.validate.Asserts;
 import com.ql.blog.domain.user.enums.LoginStatusEnum;
@@ -94,14 +95,18 @@ public class User extends BaseAggregateRoot implements AggregateRoot, UserDetail
      * 登录
      *
      * @param password 密码
+     * @return {@link String}
      */
-    public void login(String password) {
+    public String login(String password) {
         // 判断密码
         judgePasswordCorrect(password);
 
         // 设置登录状态
         setLoginStatus(LoginStatusEnum.LOGGED_IN.getVal());
         setUpdateUser(this.username);
+
+        // 生成token
+        return TokenUtil.jwtTokenUtils.generateToken(this.username);
     }
 
     /**
@@ -122,6 +127,8 @@ public class User extends BaseAggregateRoot implements AggregateRoot, UserDetail
     public void register() {
         // 修改登录状态
         setLoginStatus(LoginStatusEnum.NOT_LOGGED_IN.getVal());
+        // 设置密码
+        setPassword(BlogPasswordEncoder.passwordEncoder.encode(this.password));
         setCreateUser(this.username);
         setUpdateUser(this.password);
     }

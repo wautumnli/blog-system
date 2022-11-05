@@ -65,7 +65,7 @@ public class Result<T> {
      * @return {@link Result}
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static Result fail(Object data) {
+    public static <T> Result<T> fail(T data) {
         return new Result()
                 .setCode(FAIL.getCode())
                 .setStatus(false)

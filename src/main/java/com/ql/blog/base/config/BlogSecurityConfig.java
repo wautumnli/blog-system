@@ -80,7 +80,7 @@ public class BlogSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/swagger**/**", "/v3/api-docs", "/swagger-resources**/*")
+                .antMatchers("/**", "/swagger**/**", "/v3/api-docs", "/swagger-resources**/*")
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()

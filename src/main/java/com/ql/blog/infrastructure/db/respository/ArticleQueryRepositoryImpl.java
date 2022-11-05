@@ -33,7 +33,7 @@ public class ArticleQueryRepositoryImpl implements ArticleQueryRepository {
     private ArticleContentDao articleContentDao;
 
     @Override
-    @SuppressWarnings({"rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public PageInfo findPageList(ArticlePageCondition condition) {
         // 开启分页
         PageHelper.startPage(condition.getPageIndex(), condition.getPageSize());
@@ -41,8 +41,8 @@ public class ArticleQueryRepositoryImpl implements ArticleQueryRepository {
         // 查询
         List<ArticlePo> articlePoList = articleDao.selectList(Wrappers.<ArticlePo>lambdaQuery()
                 .eq(StrUtil.isNotBlank(condition.getArticleName()), ArticlePo::getArticleName, condition.getArticleName()));
-        PageInfo<ArticlePo> pageInfo = new PageInfo<>(articlePoList);
-        pageInfo.setList(ArticleMapper.MAPPER.poToDto(articlePoList));
+        PageInfo pageInfo = new PageInfo<>(articlePoList);
+        pageInfo.setList(ArticleMapper.MAPPER.toPageDto(articlePoList));
         return pageInfo;
     }
 

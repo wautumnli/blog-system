@@ -29,17 +29,16 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public void save(Article article) {
-        ArticlePo articlePo = saveAndGetArticle(article);
-
-        Long id = articlePo.getId();
         ArticleContent articleContent = article.getArticleContent();
         ArticleContentPo articleContentPo = ArticleMapper.MAPPER.toPo(articleContent);
         articleContentPo.setContent(articleContent.getContent().getBytes(StandardCharsets.UTF_8));
-        articleContentPo.setId(id);
         int save = articleContentDao.insert(articleContentPo);
         if (save == 0) {
             Asserts.of();
         }
+
+        article.setContentId(articleContentPo.getId());
+        saveArticle(article);
     }
 
     @Override
@@ -77,12 +76,11 @@ public class ArticleRepositoryImpl implements ArticleRepository {
         articleContentDao.deleteById(article.getContentId());
     }
 
-    private ArticlePo saveAndGetArticle(Article article) {
+    private void saveArticle(Article article) {
         ArticlePo articlePo = ArticleMapper.MAPPER.toPo(article);
         int insert = articleDao.insert(articlePo);
         if (insert == 0) {
             Asserts.of();
         }
-        return articlePo;
     }
 }

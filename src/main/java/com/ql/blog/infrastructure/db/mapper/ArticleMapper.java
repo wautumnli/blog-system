@@ -6,6 +6,8 @@ import com.ql.blog.infrastructure.db.model.ArticleContentPo;
 import com.ql.blog.infrastructure.db.model.ArticlePo;
 import com.ql.blog.interaction.web.article.model.ArticleContentDto;
 import com.ql.blog.interaction.web.article.model.ArticleDto;
+import com.ql.blog.interaction.web.article.model.ArticlePageDto;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -42,6 +44,23 @@ public interface ArticleMapper {
     ArticleContentPo toPo(ArticleContent articleContent);
 
     /**
+     * 文章持久化对象集合
+     *
+     * @param articlePoList 条订单列表
+     * @return {@link List}<{@link ArticlePageDto}>
+     */
+    @IterableMapping(elementTargetType = ArticlePageDto.class)
+    List<ArticlePageDto> toPageDto(List<ArticlePo> articlePoList);
+
+    /**
+     * 转dto
+     *
+     * @param articlePo 持久化对象
+     * @return {@link ArticleDto}
+     */
+    ArticleDto toDto(ArticlePo articlePo);
+
+    /**
      * 实体
      *
      * @param articlePo 持久化对象
@@ -58,21 +77,6 @@ public interface ArticleMapper {
     @Mapping(target = "content", ignore = true)
     ArticleContent toEntity(ArticleContentPo articleContentPo);
 
-    /**
-     * 文章持久化对象集合
-     *
-     * @param articlePoList 条订单列表
-     * @return {@link List}<{@link ArticlePo}>
-     */
-    List<ArticlePo> poToDto(List<ArticlePo> articlePoList);
-
-    /**
-     * 转dto
-     *
-     * @param articlePo 持久化对象
-     * @return {@link ArticleDto}
-     */
-    ArticleDto toDto(ArticlePo articlePo);
 
     /**
      * 为dto

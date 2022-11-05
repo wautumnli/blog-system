@@ -36,6 +36,7 @@ public class Article extends BaseAggregateRoot implements AggregateRoot {
      * 文章内容
      */
     private ArticleContent articleContent;
+    private int ver;
 
     /**
      * 初始化

@@ -2,6 +2,7 @@ package com.ql.blog.application.user;
 
 import com.ql.blog.base.result.Result;
 import com.ql.blog.interaction.web.user.model.LoginCommand;
+import com.ql.blog.interaction.web.user.model.LoginResultDto;
 import com.ql.blog.interaction.web.user.model.RegisterCommand;
 
 /**
@@ -15,9 +16,9 @@ public interface UserCommandService {
      * 登录
      *
      * @param command 命令
-     * @return {@link Result}
+     * @return {@link Result}<{@link LoginResultDto}>
      */
-    Result login(LoginCommand command);
+    Result<LoginResultDto> login(LoginCommand command);
 
     /**
      * 注册
@@ -25,5 +26,5 @@ public interface UserCommandService {
      * @param command 命令
      * @return {@link Result}
      */
-    Result register(RegisterCommand command);
+    Result<Void> register(RegisterCommand command);
 }

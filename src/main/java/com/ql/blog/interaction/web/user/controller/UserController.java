@@ -3,6 +3,7 @@ package com.ql.blog.interaction.web.user.controller;
 import com.ql.blog.application.user.UserCommandService;
 import com.ql.blog.base.result.Result;
 import com.ql.blog.interaction.web.user.model.LoginCommand;
+import com.ql.blog.interaction.web.user.model.LoginResultDto;
 import com.ql.blog.interaction.web.user.model.RegisterCommand;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,7 +35,7 @@ public class UserController {
      */
     @ApiOperation(value = "登录")
     @PostMapping("/login")
-    public Result login(@RequestBody @Valid LoginCommand command) {
+    public Result<LoginResultDto> login(@RequestBody @Valid LoginCommand command) {
         return userCommandService.login(command);
     }
 
@@ -46,7 +47,7 @@ public class UserController {
      */
     @ApiOperation(value = "注册")
     @PostMapping("/register")
-    public Result register(@RequestBody @Valid RegisterCommand command) {
+    public Result<Void> register(@RequestBody @Valid RegisterCommand command) {
         return userCommandService.register(command);
     }
 }

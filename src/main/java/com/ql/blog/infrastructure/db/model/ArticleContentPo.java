@@ -13,7 +13,7 @@ import java.util.Date;
  * @date 2022/11/04
  */
 @Data
-@TableName("a_article_content")
+@TableName("bl_article_content")
 public class ArticleContentPo implements PersistenceObject {
 
     /**
@@ -29,23 +29,23 @@ public class ArticleContentPo implements PersistenceObject {
     /**
      * 创建时间
      */
-    @TableField(value = "createTime", fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
     /**
      * 创建用户
      */
-    @TableField(value = "createUser")
+    @TableField(value = "create_user")
     private String createUser;
     /**
      * 更新时间
      */
-    @TableField(value = "updateTime", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     /**
      * 更新用户
      */
-    @TableField(value = "updateUser")
-    private Date updateUser;
+    @TableField(value = "update_user")
+    private String updateUser;
     /**
      * 删除
      */

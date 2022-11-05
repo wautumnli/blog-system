@@ -4,9 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
+@ConditionalOnBean(value = JwtProperties.class)
 public class JwtTokenUtils {
 
     private static final String CLAIM_KEY_USERNAME = "sub";
@@ -27,6 +30,12 @@ public class JwtTokenUtils {
 
     @Resource
     private JwtProperties jwtProperties;
+
+    @PostConstruct
+    public void init() {
+        TokenUtil.jwtTokenUtils = this;
+        TokenUtil.jwtProperties = this.jwtProperties;
+    }
 
     public String getUserNameFromToken(String token) {
         String username;

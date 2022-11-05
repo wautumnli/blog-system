@@ -43,6 +43,9 @@ public class UserCommandServiceImpl implements UserCommandService {
         // 用户登录
         String token = user.login(command.getPassword());
 
+        // 存储
+        userManager.save(user);
+
         // 返回结果
         return Result.suc(new LoginResultDto()
                 .setToken(token)

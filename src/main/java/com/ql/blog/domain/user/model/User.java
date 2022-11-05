@@ -104,6 +104,7 @@ public class User extends BaseAggregateRoot implements AggregateRoot, UserDetail
         // 设置登录状态
         setLoginStatus(LoginStatusEnum.LOGGED_IN.getVal());
         setUpdateUser(this.username);
+        update(this);
 
         // 生成token
         return TokenUtil.jwtTokenUtils.generateToken(this.username);
@@ -131,5 +132,6 @@ public class User extends BaseAggregateRoot implements AggregateRoot, UserDetail
         setPassword(BlogPasswordEncoder.passwordEncoder.encode(this.password));
         setCreateUser(this.username);
         setUpdateUser(this.password);
+        save(this);
     }
 }

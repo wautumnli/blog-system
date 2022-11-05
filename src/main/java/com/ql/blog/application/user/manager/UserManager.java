@@ -15,11 +15,4 @@ public interface UserManager {
      * @param user 用户
      */
     void save(User user);
-
-    /**
-     * 更新
-     *
-     * @param user 用户
-     */
-    void update(User user);
 }

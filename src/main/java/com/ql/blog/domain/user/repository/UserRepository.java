@@ -1,5 +1,6 @@
 package com.ql.blog.domain.user.repository;
 
+import com.ql.blog.base.repository.BaseRepository;
 import com.ql.blog.domain.user.model.User;
 
 /**
@@ -8,7 +9,7 @@ import com.ql.blog.domain.user.model.User;
  * @author wanqiuli
  * @date 2022/11/04
  */
-public interface UserRepository {
+public interface UserRepository extends BaseRepository {
     /**
      * 获取用户用户名
      *
@@ -16,20 +17,4 @@ public interface UserRepository {
      * @return {@link User}
      */
     User getUserByUsername(String username);
-
-    /**
-     * 更新
-     *
-     * @param user 用户
-     * @return int
-     */
-    int update(User user);
-
-    /**
-     * 保存
-     *
-     * @param user 用户
-     * @return int
-     */
-    int save(User user);
 }
